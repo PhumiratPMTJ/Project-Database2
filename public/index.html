@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPsport</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans Thai' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <!-- logo -->
+            <a href="index.html">
+                <img src="./image/3.png" alt="GPsport Logo" class="logonav">
+            </a>
+
+            <!-- Home Page Text -->
+            <div class="onweb">HOME PAGE</div>
+
+
+            <!-- Profile Section -->
+            <div class="nav-profile">
+                <div id="userInfo"></div> <!-- ตรงนี้จะให้ JS เติมข้อมูลเข้าไป -->
+            </div>
+
+
+            <!-- Links for Login, Contact, Instagram -->
+            <div class="text">
+                <a href="login.html" class="login">Login</a>
+                <a href="payment.html" class="payment">payment</a>
+                <a href="contact.html" class="contact">Contact</a>
+                <a href="https://www.instagram.com/p_phumirat_.04/"
+                    class="instagram" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
+            <!-- Profile and Cart -->
+            <div class="nav-profile">
+                <div onclick="openCart()" class="nav-profile-cart">
+                    <i class="fas fa-cart-shopping"></i>
+                    <div id="cartcount">
+                        0
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar">
+            <input onkeyup="searchsomething(this)" id="txt_search" type="text" class="sidebar-search"
+                placeholder="Search something...">
+
+            <a onclick="searchproduct('All')" class="sidebar-items">
+                All product
+            </a>
+            <a onclick="searchproduct('Shoe')" class="sidebar-items">
+                Shoe
+            </a>
+            <a onclick="searchproduct('Shirt')" class="sidebar-items">
+                Shirt
+            </a>
+            <a onclick="searchproduct('Pants')" class="sidebar-items">
+                Pants
+            </a>
+            <a onclick="searchproduct('Accessories')" class="sidebar-items">
+                Accessories
+            </a>
+            <a onclick="searchproduct('Bag')" class="sidebar-items">
+                Bag
+            </a>
+            <a onclick="searchproduct('Hat')" class="sidebar-items">
+                Hat
+            </a>
+            <a onclick="searchproduct('Equipment')" class="sidebar-items">
+                Equipment
+            </a>
+
+
+        </div>
+        <div id="productlist" class="product">
+            <div class="product-item">
+                <img class="product-img"
+                    src="https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/cf9c98862f8549f7a26e8eebb3fcc03b_9366/Ultraboost_5_ID8809_HM1.jpg">
+                <p style="font-size: 1vw;">Nike</p>
+                <p style="font-size: 0.7vw;">5000 TBH</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalDesc" class="modal" style="display: none;">
+        <div onclick="closeModal()" class="modal-bg"></div>
+        <div class="modal-page">
+            <h2>Detail</h2>
+            <br>
+            <div class="modaldesc-content">
+                <div class="modaldesc-detail">
+                    <img id="mdd-img" src="" alt="Product Image" class="modal-img">
+                    <div class="modal-detail">
+                        <p id="mdd-name" class="modal-name">Product Name</p>
+                        <p id="mdd-price" class="modal-price">5000 THB</p>
+                        <br>
+                        <p id="mdd-desc" class="modal-desc">Description...</p>
+                        <button onclick="closeModal()" class="btn">Close</button>
+                        <button onclick="addtocart()" class="btn btn-buy">Add to cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalDesc" class="modal" style="display: none;">
+        <div onclick="closeModal()" class="modal-bg"></div>
+        <div class="modal-page">
+            <h2>Detail</h2>
+            <br>
+            <div class="modaldesc-content">
+                <img id="mdd-img" class="modaldesc-img"
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                    alt="">
+                <div class="modaldesc-detail">
+                    <p id="mdd-name" style="font-size: 1.5vw;">Product name</p>
+                    <p id="mdd-price" style="font-size: 1.2vw;">500 THB</p>
+                    <br>
+                    <p id="mdd-desc" style="color: #adadad;">Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+                    </p>
+                    <br>
+                    <div class="btn-control">
+                        <button onclick="closeModal()" class="btn">Close</button>
+                        <button onclick="addtocart()" class="btn btn-buy">Add to cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="modalCart" class="modal" style="display: none;">
+        <div onclick="closeModal()" class="modal-bg"></div>
+        <div class="modal-page">
+            <h2>My cart</h2>
+            <br>
+            <div id="mycart" class="cartlist">
+                <div class="cartlist-item">
+                    <div class="cartlist-left">
+                        <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/7d3215e5-f431-4b02-8875-a069ca8acc87/NIKE+RUN+SWIFT+3.png"
+                            alt="">
+                        <div class="cartlist-detail">
+                            <p style="font-size: 1.5vw;">Product name</p>
+                            <p style="font-size: 1.3vw;">500 THB</p>
+                        </div>
+                    </div>
+                    <div class="cartlist-right">
+                        <p class="btnc">-</p>
+                        <p style="margin: 0px 20px;">1</p>
+                        <p class="btnc">+</p>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-control">
+                <button onclick="closeModal()" class="btn btn-buy">
+                    Cancel
+                </button>
+                <button onclick="addtocart()" class="btn btn-buy">
+                    Buy
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 GusPhu - GPsport</p>
+    </footer>
+</body>
+
+</html>

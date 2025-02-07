@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt&family=Roboto&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #e61b36;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logonav {
+  width: 10vw;
+  height: 10vw;
+  
+}
+
+.contact-container {
+  font-family: 'Prompt', sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+h2 {
+  text-align: center;
+  color: #000000;
+  font-family: 'Prompt', sans-serif;
+  font-size: 2rem;
+}
+
+p {
+  text-align: center;
+  color: #000000;
+  font-family: 'Prompt', sans-serif;
+  font-size: 1.3rem;
+  display: flex;
+}
+
+.contact-info {
+  text-align: center;
+}
+
+.contact-info a {
+  color: #9c1032;
+  text-decoration: none;
+  text-align: center;
+}
+
+.contact-info a:hover {
+  text-decoration: none;
+}
+
+footer {
+  background: white;
+  color: #9c1032;
+  padding: 5px;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+footer p {
+  font-family: 'Roboto', 'noto-sans-thai';
+  font-size: 1.02rem;
+}
+
+

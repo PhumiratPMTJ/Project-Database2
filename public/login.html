@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container" id="loginFormContainer">
+            <h2 class="title">🔑 Login</h2>
+            <form id="loginForm">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" id="loginButton">Login</button>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+
+        <!-- User info container (visible after login) -->
+        <div id="userInfo" style="display: none;">
+            <h3>Welcome, <span id="usernameDisplay"></span></h3>
+            <button id="logoutButton">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Send login request to the server
+            const res = await fetch('/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await res.json();
+            if (data.message === '✅ Login Successful') {
+                // Store the username in localStorage
+                localStorage.setItem('username', data.user.username);
+
+                // Hide the login form and show user info
+                document.getElementById('loginFormContainer').style.display = 'none';
+                document.getElementById('userInfo').style.display = 'block';
+                document.getElementById('usernameDisplay').textContent = data.user.username;
+
+                // Redirect to the index page
+                window.location.href = 'index.html';  // You can change this to show the homepage or other sections
+            } else {
+                alert(data.message);
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            // Clear user data from localStorage
+            localStorage.removeItem('username');
+
+            // Hide user info and show the login form again
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('loginFormContainer').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
