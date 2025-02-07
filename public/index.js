@@ -528,22 +528,19 @@ $(document).ready(() => {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     if (currentUser) {
-        if ($("#userInfo").children().length === 0) {
-            $("#userInfo").html(
-                `<div class="nav-user">
-                    <span>👤 ${currentUser.username}</span>
-                    <button onclick="logout()">Logout</button>
-                </div>`
-            );
-        }
+        $("#userInfo").html(`
+            <div class="nav-user">
+                <span>👤 ${currentUser.username}</span>
+                <button onclick="logout()">Logout</button>
+            </div>
+        `);
         $(".login").hide();
     }
 });
 
-// ฟังก์ชัน logout
 function logout() {
-    localStorage.removeItem("currentUser");  // ลบข้อมูลผู้ใช้จาก localStorage
-    window.location.href = '/index.html'; // เปลี่ยนเส้นทางไปที่หน้า index
+    localStorage.removeItem("currentUser");
+    location.reload();
 }
 
 

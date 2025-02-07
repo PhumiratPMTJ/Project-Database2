@@ -151,18 +151,13 @@ footer p {
 #cartcount {
     position: absolute;
     top: -5px;
-    /* ดันตัวเลขขึ้นไป */
     right: -8px;
-    /* เลื่อนตัวเลขไปทางขวา */
     background-color: red;
-    /* พื้นหลังสีแดง */
     color: white;
-    /* ตัวเลขสีขาว */
     font-size: 12px;
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    /* ทำให้เป็นวงกลม */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -257,8 +252,6 @@ footer p {
     height: 17vw;
     object-fit: cover;
     border-radius: 10px;
-
-
 }
 
 
@@ -286,6 +279,7 @@ footer p {
     padding: 20px;
     display: inline;
 }
+
 
 .modaldesc-content {
     width: 100%;

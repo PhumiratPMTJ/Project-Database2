@@ -18,7 +18,7 @@
             <p class="signup-link">Don't have an account? <a href="register.html">Register here</a></p>
         </div>
 
-        <!-- User info container (visible after login) -->
+
         <div id="userInfo" style="display: none;">
             <h3>Welcome, <span id="usernameDisplay"></span></h3>
             <button id="logoutButton">Logout</button>
@@ -27,43 +27,35 @@
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-            // Send login request to the server
-            const res = await fetch('/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
+    const res = await fetch('/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    });
 
-            const data = await res.json();
-            if (data.message === '✅ Login Successful') {
-                // Store the username in localStorage
-                localStorage.setItem('username', data.user.username);
+    const data = await res.json();
+    if (data.message === '✅ Login Successful') {
+        localStorage.setItem('currentUser', JSON.stringify(data.user));
+        document.getElementById('loginFormContainer').style.display = 'none';
+        document.getElementById('userInfo').style.display = 'block';
+        document.getElementById('usernameDisplay').textContent = data.user.username;
 
-                // Hide the login form and show user info
-                document.getElementById('loginFormContainer').style.display = 'none';
-                document.getElementById('userInfo').style.display = 'block';
-                document.getElementById('usernameDisplay').textContent = data.user.username;
+        window.location.href = 'index.html'; 
+    } else {
+        alert(data.message);
+    }
+});
 
-                // Redirect to the index page
-                window.location.href = 'index.html';  // You can change this to show the homepage or other sections
-            } else {
-                alert(data.message);
-            }
-        });
+document.getElementById('logoutButton').addEventListener('click', () => {
+    localStorage.removeItem('currentUser');
+    document.getElementById('userInfo').style.display = 'none';
+    document.getElementById('loginFormContainer').style.display = 'block';
+});
 
-        // Logout functionality
-        document.getElementById('logoutButton').addEventListener('click', () => {
-            // Clear user data from localStorage
-            localStorage.removeItem('username');
-
-            // Hide user info and show the login form again
-            document.getElementById('userInfo').style.display = 'none';
-            document.getElementById('loginFormContainer').style.display = 'block';
-        });
     </script>
 </body>
 </html>
